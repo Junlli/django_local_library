@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %} <!-- 声明{% csrf_token %}，以确保我们的表单能够抵抗 CSRF 攻击 -->
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit" />
+    
+</form>
+{% endblock %}

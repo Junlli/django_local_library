@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>book_form</title>
+</head>
+
+<body>
+	<br>
+	{% extends "base_generic.html" %}
+
+	{% block content %}
+
+	<form action="" method="post">
+	    {% csrf_token %}
+	    <table>
+	    	{{ form.as_table }}
+	    </table>
+	    <input type="submit" value="Submit" />
+	    
+	</form>
+	{% endblock %}
+</body>
