@@ -1,22 +1,111 @@
-{% extends "base_generic.html" %}
+<!DOCTYPE html>
 
-{% block content %}
-<h1>Local Library Home</h1>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SoKu</title>
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css' %}">
+  <script src="{% static 'js/jquery-1.12.4.js' %}"></script>
+  <script src="{% static 'js/jquery.pagination.js' %}"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+</head>
 
-  <p>Welcome to <em>LocalLibrary</em>, a very basic Django website developed as a tutorial example on the Mozilla Developer Network.</p>
+<body>
+<header>
+  <div class="header-mask">
+    <div class="nav w clearfix">
+      <ul>
+        <li><a href="/catalog/xiaoshuowenxue">小说文学</a></li>
+        <li><a href="/catalog/mingrenzhuanji">名人传记</a></li>
+        <li><a href="/catalog/xuexijiaoyu">学习教育</a></li>
+        <li><a href="/catalog/chenggonglizhi">成功励志</a></li>
+        <li><a href="/catalog/ertongduwu">儿童读物</a></li>
+        <li><a href="/catalog/shenghuoshishang">生活时尚</a></li>
+        <li><a href="/catalog/renwensheke">人文社科</a></li>
+        <li><a href="/catalog/xinlibaike">心理百科</a></li>
+      </ul>
+      <div class="search">
+        <input type="text" class="search-txt">
+        <div class="search-in">
+          <input type="button" class="search-btn">
+          <i></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-<h2>Dynamic content</h2>
 
-  <p>The library has the following record counts:</p>
-  <ul>
-    <li><strong>Books:</strong> {{ num_books }}</li>
-    <li><strong>Copies:</strong> {{ num_instances }}</li>
-    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
-    <li><strong>Authors:</strong> {{ num_authors }}</li>
-    <li><strong>Genres:</strong>{{ num_genres }}</li>
+<div class="main w">
+  <!--书本列表-->
+  <div class="content clearfix">
+    {% for book in current_page %}
+    <div class="book-introduct ">
+      <div class="book-cover">
+        <a href="/catalog/book/{{book.id}}" class="book-img">
+          <img src='{{ MEDIA_URL }}{{ book.image }}' alt="">
+        </a>
+        <div class="book-intro-mask">
+          {% if book.genre.name == '小说文学' %}
+          <a href="/catalog/xiaoshuowenxue" class="book-genre">{{ book.genre }}</a>
+          {% endif %}
+        </div>
+      </div>
 
-  </ul>
+      <a href="#" class="book-name">{{ book.title }}</a>
+      <div class="book-author">
+        <span>作者：</span><a href="#" >{{ book.author }} </a>
+      </div>
+      <div class="book-score clearfix">
+        <span>豆瓣评分：</span>
+        <div class="score-icon score-{{ book.score }}"></div>
+      </div>
+    </div>
+    {% endfor %}
 
-<p>You have visited this page <strong>{{ num_visits }}</strong>{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+    <!--分页功能-->
+    <ul class = 'pagination'>
+      {% if current_page.has_previous %}
+      <li class = 'previous'>
+        <a href =  '/catalog/page/{{ current_page.previous_page_number }}'>上一页</a>
+      </li>
+      {% endif %}
+      {% for number in pages.page_range %}
+      {% if num_books > 20 %}
+      
+      <li
+              {% if number == current_page.number %}
+              class = "activate"
+              {% endif %}>
+        <a href = '/catalog/page/{{ number }}'>{{ number }}</a>
+      </li>
+      {% endif %}
+      {%  endfor %}
+      {% if current_page.has_next %}
+      <li class = 'next'>
+        <a href = '/catalog/page/{{ current_page.next_page_number }}'>下一页</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
 
-{% endblock %}
+  <!--登录模块-->
+  <div class="login">
+    <a href="/accounts/login" class="user-icon">
+      <img src="/static/images/index/user-icon.jpg" alt="">
+    </a>
+    <p>Hi～ 欢迎来到SoKu!</p>
+    <a href="#" class="user-login">登录</a>
+    <a href="#" class="user-register">注册</a>
+  </div>
+</div>
+
+
+</body>
+</html>
+

@@ -43,17 +43,19 @@ class Book(models.Model):
     summary = models.TextField(max_length=1000, help_text="Enter a brief description of the book")
     isbn = models.CharField('ISBN', max_length=13,
                             help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
-    genre = models.ManyToManyField(Genre, help_text="Select a genre for this book")
+    genre = models.ForeignKey('Genre', on_delete=models.SET_NULL, null=True, help_text="Select a genre for this book")
     # ManyToManyField used because a genre can contain many books and a Book can cover many genres.
     # Genre class has already been defined so we can specify the object above.
     language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(upload_to='profile_image', blank=True)
+    score = models.SmallIntegerField()
 
-    def display_genre(self):
-        """
-        Creates a string for the Genre. This is required to display genre in Admin.
-        """
-        return ', '.join([genre.name for genre in self.genre.all()[:3]])
-        display_genre.short_description = 'Genre'
+    # def display_genre(self):
+    #     """
+    #     Creates a string for the Genre. This is required to display genre in Admin.
+    #     """
+    #     return ', '.join([genre.name for genre in self.genre.all()[:3]])
+    #     display_genre.short_description = 'Genre'
 
     def get_absolute_url(self):
         """
@@ -116,13 +118,11 @@ class Author(models.Model):
     """
     Model representing an author.
     """
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField(null=True, blank=True)
-    date_of_death = models.DateField('died', null=True, blank=True)
+    name = models.CharField(max_length=100,)
+    author_summary = models.TextField(max_length=1000, help_text="Enter a brief description of the author")
 
     class Meta:
-        ordering = ["last_name", "first_name"]
+        ordering = ["name", "author_summary"]
 
     def get_absolute_url(self):
         """
@@ -134,4 +134,5 @@ class Author(models.Model):
         """
         String for representing the Model object.
         """
-        return '%s, %s' % (self.last_name, self.first_name)
+        # return '%s, %s' % (self.last_name, self.first_name)
+        return '%s' %(self.name)

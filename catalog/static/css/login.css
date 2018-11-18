@@ -1,0 +1,88 @@
+html{
+  font-family: sans-serif;
+  height: 100%;
+}
+
+body{
+  background: url("../images/login/cover.png") no-repeat;
+  background-size: 100% 100%;
+}
+
+h1{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: rgb(114, 163, 202);
+  font-size: 50px;
+  letter-spacing: 5px;
+  text-shadow: 5px 5px 5px black;
+  margin-top: 150px;
+  text-align: center;
+}
+
+
+.form {
+  margin: 20px auto 0;
+  width: 300px;
+  height: 250px;
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+  padding-top: 10px;
+}
+
+.account-input, .password-input {
+  height: 35px;
+  margin-top: 30px;
+  position: relative;
+}
+
+input {
+  width: 198px;
+  height: 35px;
+  border: 1px solid black;
+  font-size: 15px;
+  padding-left: 36px;
+  line-height: 35px;
+  outline: none;
+}
+
+.account-icon {
+  width: 25px;
+  height: 25px;
+  background: url("../images/login/icon-user.jpg") no-repeat;
+  position: absolute;
+  left: 54px;
+  top: 4px;
+}
+
+.password-icon {
+  width: 25px;
+  height: 25px;
+  background: url("../images/login/icon-pwd.jpg") no-repeat;
+  position: absolute;
+  left: 54px;
+  top: 4px;
+}
+
+button{
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  height: 35px;
+  width: 200px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 30px;
+}
+
+.lose-pwd {
+  margin-top: 10px;
+}
+
+.err-tip {
+  color: red;
+  position: absolute;
+  top: 10px;
+  left: 36px;
+}

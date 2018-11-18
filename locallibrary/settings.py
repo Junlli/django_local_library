@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'eh@6#xzyb0ebj(vxz@*9rh8-sg(=l+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = ['junlli-library.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -116,28 +117,33 @@ USE_L10N = True
 
 USE_TZ = False
 
-
-# Redirect to home URL after login (Default redirects to /accounts/profile/)
+# Redirect to home URL after login (Default redirects to /accounts/profile/) 登录后重定向到站点主页
 LOGIN_REDIRECT_URL = '/'
 
-# Add to test email:
+# 可以从命令行控制台复制密码重置链接
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+
 # The absolute path to the directory where collectstatic will collect static files for deployment.
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
-
+STATICFILES_DIRS = [
+     os.path.join(BASE_DIR, "static")
+]
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# 配置media路径
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

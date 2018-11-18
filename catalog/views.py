@@ -2,9 +2,9 @@ from django.shortcuts import render
 
 # Create your views here.
 from .models import Book, Author, BookInstance, Genre
-
-
-def index(request):
+from django.core.paginator import Paginator
+from django.shortcuts import render
+def index(request, page_number = '1'):
     """
     View function for home page of site.
     """
@@ -17,6 +17,10 @@ def index(request):
     num_genres = Genre.objects.count()
     num_visits = request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits+1
+    book_list = Book.objects.all()
+    p = Paginator(book_list, 20)
+    current_page = p.page(int(page_number))
+
 
     # Render the HTML template index.html with the data in the context variable
     return render(
@@ -24,7 +28,8 @@ def index(request):
         'index.html',
         context={'num_books': num_books, 'num_instances': num_instances,
                  'num_instances_available': num_instances_available, 'num_authors': num_authors,
-                 'num_genres': num_genres, 'num_visits': num_visits})
+                 'num_genres': num_genres, 'num_visits': num_visits, 'book_list': book_list, 'pages': p,
+                 'current_page': current_page})
 
 
 from django.views import generic
@@ -191,3 +196,43 @@ class BookDelete(PermissionRequiredMixin, DeleteView):
     permission_required = ('catalog.can_mark_returned', 'catalog.can_edit')
     model = Book
     success_url = reverse_lazy('books')
+
+
+class Xiaoshuo(generic.ListView):
+    model = Book
+    template_name = 'catalog/xiaoshuowenxue.html'  # Specify your own template name/location
+
+
+class Zhuanji(generic.ListView):
+    model = Book
+    template_name = 'catalog/mingrenzhuanji.html'  # Specify your own template name/location
+
+
+class Xuexi(generic.ListView):
+    model = Book
+    template_name = 'catalog/xuexijiaoyu.html'  # Specify your own template name/location
+
+
+class Lizhi(generic.ListView):
+    model = Book
+    template_name = 'catalog/chenggonglizhi.html'  # Specify your own template name/location
+
+
+class Ertong(generic.ListView):
+    model = Book
+    template_name = 'catalog/ertongduwu.html'  # Specify your own template name/location
+
+
+class Shenghuo(generic.ListView):
+    model = Book
+    template_name = 'catalog/shenghuoshishang.html'  # Specify your own template name/location
+
+
+class Renwen(generic.ListView):
+    model = Book
+    template_name = 'catalog/renwensheke.html'  # Specify your own template name/location
+
+
+class Xinli(generic.ListView):
+    model = Book
+    template_name = 'catalog/xinlibaike.html'  # Specify your own template name/location

@@ -16,8 +16,8 @@ class BookInline(admin.TabularInline):
 # Define the admin class
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('last_name', 'first_name', 'date_of_birth', 'date_of_death')
-    fields = ['first_name', 'last_name', ('date_of_birth', 'date_of_death')]
+    list_display = ('name', 'author_summary')
+    fields = ['name', 'author_summary']
     inlines = [BookInline]
 
 
@@ -34,7 +34,7 @@ class BookAdmin(admin.ModelAdmin):
      - fields to be displayed in list view (list_display)
      - adds inline addition of book instances in book view (inlines)
     """
-    list_display = ('title', 'author', 'display_genre')
+    list_display = ('title', 'author', 'genre')
     inlines = [BookInstanceInline]
 
 

@@ -5,10 +5,13 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path(r'^books/', views.BookListView.as_view(), name='books'),
-    path(r'^book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),
+    path(r'books/', views.BookListView.as_view(), name='books'),
+    path(r'book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),
     path('authors/', views.AuthorListView.as_view(), name='authors'),
     path('author/<int:pk>', views.AuthorDetailView.as_view(), name='author-detail'),
+    path('xiaoshuowenxue/', views.Xiaoshuo.as_view(), name='xiaoshuowenxue'),
+    path('mingrenzhuanji/', views.Zhuanji.as_view(), name='mingrenzhuanji'),
+    path('page/<int:page_number>', views.index, name="page")
 ]
 
 urlpatterns += [
@@ -32,3 +35,4 @@ urlpatterns += [
     path('book/<int:pk>/update', views.BookUpdate.as_view(), name='book_update'),
     path('book/<int:pk>/delete', views.BookDelete.as_view(), name='book_delete'),
 ]
+

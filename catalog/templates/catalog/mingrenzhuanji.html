@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>名人传记</title>
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <script src="{% static 'js/jquery-1.12.4.js' %}"></script>
+  <script src="{% static 'js/jquery.pagination.js' %}"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+
+
+</head>
+<body>
+<header>
+  <div class="header-mask">
+    <div class="nav w clearfix">
+      <ul>
+        <li><a href="/catalog/xiaoshuowenxue">小说文学</a></li>
+        <li><a href="#">名人传记</a></li>
+        <li><a href="#">学习教育</a></li>
+        <li><a href="#">成功励志</a></li>
+        <li><a href="#">儿童读物</a></li>
+        <li><a href="#">生活时尚</a></li>
+        <li><a href="#">人文社科</a></li>
+        <li><a href="#">心理百科</a></li>
+      </ul>
+      <div class="search">
+        <input type="text" class="search-txt">
+        <div class="search-in">
+          <input type="button" class="search-btn">
+          <i></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="main w">
+  <div class="content clearfix">
+
+    {% for book in book_list %}
+    {% if book.genre.name == '名人传记' %}
+    <div class="book-introduct ">
+      <a href="#" class="book-cover">
+        <img src='{{ MEDIA_URL }}{{ book.image }}' alt="">
+
+        <div class="book-intro-mask">{{ book.genre }}</div>
+
+      </a>
+      <a href="#" class="book-name">{{ book.title }}</a>
+      <div class="book-author">
+        <span>作者：</span><a href="#" >{{ book.author }} </a>
+      </div>
+      <div class="book-score clearfix">
+        <span>豆瓣评分：</span>
+        <div class="score-icon score-{{ book.score }}"></div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+
+    <div class="pagination">
+      <a href="#" class="pre">上一页</a>
+      <a href="#" ></a>
+      <a href="#" class="next">下一页</a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
+

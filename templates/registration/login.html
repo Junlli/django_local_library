@@ -1,39 +1,72 @@
-{% extends "base_generic.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SoKu</title>
+  <!--<link rel="stylesheet" type="text/css" href="login.css" />-->
+  <!--<link rel="stylesheet" type="text/css" href="login/base.css" />-->
+  <!--<link rel="shortcut icon" href="login/favicon.ico" />-->
 
-{% block content %}
+    <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    <script src="{% static 'js/jquery-1.12.4.js' %}"></script>
+    <script src="{% static 'js/login.js' %}"></script>
+</head>
+<body>
+  
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+  {% if next %}
+      {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+      {% else %}
+      <!--<p>Please login to see this page.</p>-->
+      {% endif %}
+  {% endif %}
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
+  <h1>欢迎来到SoKu</h1>
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
+  <form method="post" action="{% url 'login' %}" novalidate autocomplete="off">
+    {% csrf_token %}
 
-<div>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</div>
-<div>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</div>
+    <div class="form">
+        {% if form.errors %}
+        <p class="err-tip">您输入的账号或密码不正确，请重新输入。</p>
+        {% endif %}
 
-<div>
-  <input type="submit" value="login" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</div>
-</form>
 
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+       <div class="account-input">
+           <div class="account-icon"></div>
+           <label for="id_username"></label>
+           <input type="text" name="username" autofocus maxlength="18" required id="id_username" placeholder="账号">
+       </div>
 
-{% endblock %}
+      <!-- <td>{{ form.username }}</td> -->
+      <div class="password-input">
+          <div class="password-icon"></div>
+          <label for="id_password"></label>
+           <input type="password" name="password" required id="id_password" placeholder="密码">
+      </div>
+
+      <!-- <td>{{ form.password }}</td> -->
+<!-- 
+      input type="text" name="username" autofocus maxlength="254" required id="id_username" / -->
+
+      <button type="submit" value="login" id="btn">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+      <input type="hidden" name="next" value="{{ next }}" />
+
+      <div class="lose-pwd">
+        <a href="{% url 'password_reset' %}" class="lose-pwd">忘记密码？</a>
+      </div>
+    </div>
+
+  </form>
+
+
+
+
+</body>
+</html>

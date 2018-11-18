@@ -1,0 +1,250 @@
+.w {
+    width: 1220px;
+    margin: 0 auto;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src:  url('../icomoon/fonts/icomoon.eot?hrstq9');
+    src:  url('../icomoon/fonts/icomoon.eot?hrstq9#iefix') format('embedded-opentype'),
+    url('../icomoon/fonts/icomoon.ttf?hrstq9') format('truetype'),
+    url('../icomoon/fonts/icomoon.woff?hrstq9') format('woff'),
+    url('../icomoon/fonts/icomoon.svg?hrstq9#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: #adb2b1!important;
+}
+
+/*头部 导航栏*/
+header {
+    background: url("../images/index/header.jpg") no-repeat top center;
+    height: 166px;
+    width: 100%;
+    position: relative;
+    margin-bottom: 30px;
+}
+.header-mask {
+    width: 100%;
+    height: 50px;
+    background-color: rgba(0, 0, 0, .4);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.nav li {
+    width: 100px;
+    height: 50px;
+    float: left;
+    text-align: center;
+}
+.nav li a {
+    display: block;
+    width: 100px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+}
+.nav li a:hover {
+    background-color: #999cb2;
+}
+.nav-bgcolor {
+    background-color: #999cb2;
+}
+.search {
+    float: right;
+    height: 50px;
+}
+.search-txt {
+    display: block;
+    height: 30px;
+    width: 200px;
+    float: left;
+    outline: none;
+    border: 1px solid #ccc;
+}
+.search-in {
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+.search-btn {
+    display: block;
+    height: 30px;
+    width: 30px;
+    border: 0;
+    background-color: #CFE0F0;
+
+}
+.search i {
+    font-family: icomoon;
+    position: absolute;
+    left: 7px;
+    top: 3px;
+    font-size: 16px;
+    color: #fff;
+}
+
+/*书籍内容*/
+.content {
+    width: 880px;
+    height: 1200px;
+    background-color: #fff;
+    padding: 10px;
+    /*position: relative;*/
+    float: left;
+}
+.book-introduct {
+    width: 200px;
+    height: 340px;
+    /*background-color: skyblue;*/
+    padding: 10px;
+    border: 1px solid #ccc;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.book-introduct:nth-child(4n) {
+    margin-right: 0;
+}
+.book-introduct:hover {
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.15)
+}
+.book-cover {
+    width: 180px;
+    height: 240px;
+    position: relative;
+}
+.book-img {
+    display: block;
+    width: 180px;
+    height: 240px;
+}
+.book-cover img {
+    width: 180px;
+    height: 100%;
+}
+.book-name {
+    display: block;
+    width: 180px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+.book-author {
+    margin: 4px 0;
+}
+.book-name:hover, .book-author a:hover {
+    color: #2572f0;
+}
+.book-score span{
+    float: left;
+}
+.score-icon {
+    background: url("../images/index/score-icon.png") no-repeat;
+    width: 80px;
+    height: 15px;
+    float: left;
+    margin-top: 3px;
+}
+.score-10 {
+    background-position: 0 0;
+}
+.score-9 {
+    background-position: 0 -15px;
+}
+.score-8 {
+    background-position: 0 -30px;
+}
+.score-7 {
+    background-position: 0 -45px;
+}
+.score-6 {
+    background-position: 0 -60px;
+}
+.score-5 {
+    background-position: 0 -75px;
+}
+.score-4 {
+    background-position: 0 -90px;
+}
+.score-3 {
+    background-position: 0 -105px;
+}
+.score-2 {
+    background-position: 0 -120px;
+}
+.score-1 {
+    background-position: 0 -135px;
+}
+.book-intro-mask {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    background-color: rgba(0, 0, 0, .4);
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+}
+.book-intro-mask a {
+    color: #fff;
+    font-size: 14px;
+}
+.book-intro-mask a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+.book-genre {
+    display: block;
+    width: 80px;
+    height: 30px;
+}
+
+.book-intro-mask:hover {
+    background-color: #999cb2;
+}
+.pagination {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+
+    display: none;
+}
+
+
+/*登录模块*/
+.login {
+    width: 320px;
+    height: 500px;
+    float: right;
+    background-color: #fff;
+    text-align: center;
+}
+.user-icon {
+    display: block;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 5px solid #e3e1df;
+    margin: 0 auto;
+}
+.user-icon img {
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, .4);
+}
+.login p {
+    font-size: 14px;
+    margin-top: 5px;
+}
+.user-login, .user-register {
+    font-size: 14px;
+    margin: 5px 10px 0;
+}

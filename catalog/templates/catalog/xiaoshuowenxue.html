@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>小说文学</title>
+  <!-- Add additional CSS in static file -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <script src="{% static 'js/jquery-1.12.4.js' %}"></script>
+  <script src="{% static 'js/jquery.pagination.js' %}"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+
+
+</head>
+<body>
+<header>
+  <div class="header-mask">
+    <div class="nav w clearfix">
+      <ul>
+        <li><a href="/catalog/xiaoshuowenxue">小说文学</a></li>
+        <li><a href="/catalog/mingrenzhuanji">名人传记</a></li>
+        <li><a href="/catalog/xuexijiaoyu">学习教育</a></li>
+        <li><a href="/catalog/chenggonglizhi">成功励志</a></li>
+        <li><a href="/catalog/ertongduwu">儿童读物</a></li>
+        <li><a href="/catalog/shenghuoshishang">生活时尚</a></li>
+        <li><a href="/catalog/renwensheke">人文社科</a></li>
+        <li><a href="/catalog/xinlibaike">心理百科</a></li>
+      </ul>
+      <div class="search">
+        <input type="text" class="search-txt">
+        <div class="search-in">
+          <input type="button" class="search-btn">
+          <i></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="main w">
+  <div class="content clearfix">
+
+    {% for book in book_list %}
+    {% if book.genre.name == '小说文学' %}
+    <div class="book-introduct ">
+      <div class="book-cover">
+        <a href="/catalog/book/{{book.id}}" class="book-img">
+          <img src='{{ MEDIA_URL }}{{ book.image }}' alt="">
+        </a>
+      </div>
+      <a href="#" class="book-name">{{ book.title }}</a>
+      <div class="book-author">
+        <span>作者：</span><a href="#" >{{ book.author }} </a>
+      </div>
+      <div class="book-score clearfix">
+        <span>豆瓣评分：</span>
+        <div class="score-icon score-{{ book.score }}"></div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+
+
+  </div>
+</div>
+</body>
+</html>
+

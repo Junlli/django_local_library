@@ -57,3 +57,12 @@ urlpatterns += [
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+# 配置media的请求url
+from django.views.static import serve
+from locallibrary.settings import MEDIA_ROOT
+
+urlpatterns += [
+    path(r'^admin/', admin.site.urls),
+    path(r'^media/(?P<path>.*)$', serve, {"document_root":settings.MEDIA_ROOT}),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
